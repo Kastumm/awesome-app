@@ -1,0 +1,22 @@
+.login-page {
+  display: flex;
+  height: 100%;
+  .left-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eceff1;
+    width: 60vw;
+  }
+  .right-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 40%;
+
+    .login-box {
+      width: 400px;
+    }
+  }
+}
