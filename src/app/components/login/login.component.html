@@ -1,0 +1,53 @@
+<div class="login-box">
+  <img src="assets/svg/logo.svg" height="40px" />
+  <p style="font-weight: 800; font-size: 18px; margin-bottom: 28px">Sign in</p>
+
+  <form
+    [formGroup]="authForm"
+    (ngSubmit)="signIn()"
+    id="login-form"
+    class="login-form"
+  >
+    <div class="input-field">
+      <label for="'email">E-mail Address*</label>
+      <input
+        id="email"
+        type="email"
+        class="input-field"
+        placeholder="Email"
+        formControlName="email"
+        required
+      />
+    </div>
+    <li
+      *ngIf="formControls.email.errors?.required && isSubmitted"
+      style="color: red; font-size: 12px"
+    >
+      Required
+    </li>
+    <div class="input-field">
+      <label for="password">Password*</label>
+      <input
+        id="password"
+        type="password"
+        class="input-field"
+        placeholder="Password"
+        formControlName="password"
+        required
+      />
+    </div>
+    <li
+      *ngIf="formControls.password.errors?.required && isSubmitted"
+      style="color: red; font-size: 12px"
+    >
+      Required
+    </li>
+  </form>
+  <a href="#" style="margin-bottom: 20px; margin-top: 10px; font-size: 14px"
+    >Forgot password?</a
+  >
+  <button form="login-form" type="submit" class="login-button">Sign in</button>
+  <a href="#" style="margin-top: 30px; font-weight: 600"
+    >Don't have an account? Sign Up!</a
+  >
+</div>
