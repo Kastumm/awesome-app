@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { IUserState } from 'src/app/models/IUserState';
-
 import { Store } from '@ngrx/store';
-import { LoginAction } from 'src/app/user.actions';
+
+import { LoginAction } from 'src/app/redux/user.actions';
+import { IUserState } from 'src/app/models/IUserState';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +14,8 @@ import { LoginAction } from 'src/app/user.actions';
 export class LoginComponent implements OnInit {
   authForm!: FormGroup;
   isSubmitted = false;
+  emailFocus = false;
+  passwordFocus = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['example@example.com', Validators.required],
+      password: ['12345678', Validators.required],
     });
   }
 

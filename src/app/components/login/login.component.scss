@@ -8,27 +8,35 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    .input-field {
+    .input-container {
       display: flex;
       flex-direction: column;
-      height: 58px;
-      background-color: #f0f0f0;
-      border-radius: 15px;
-      label {
-        font-size: 13px;
-        font-weight: 300;
-        padding: 5px 15px 0px;
+      gap: 2px;
+      .input-field {
+        display: flex;
+        flex-direction: column;
+        height: 58px;
+        background-color: #f0f0f0;
+        border-radius: 15px;
+        label {
+          font-size: 13px;
+          font-weight: 300;
+          padding: 5px 15px 0px;
+        }
+        input {
+          padding: 0px 15px;
+          font-size: 16px;
+          font-weight: 500;
+          border: none;
+          outline: none;
+        }
       }
-      input {
-        padding: 0px 15px;
-        font-size: 16px;
-        font-weight: 500;
-        border: none;
-        outline: none;
+      li {
+        padding-left: 15px;
+        list-style-type: none;
+        color: red;
+        font-size: 12px;
       }
-    }
-    li {
-      list-style-type: none;
     }
   }
 

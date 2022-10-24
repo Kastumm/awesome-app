@@ -8,44 +8,66 @@
     id="login-form"
     class="login-form"
   >
-    <div class="input-field">
-      <label for="'email">E-mail Address*</label>
-      <input
-        id="email"
-        type="email"
-        class="input-field"
-        placeholder="Email"
-        formControlName="email"
-        required
-      />
+    <div class="input-container">
+      <div class="input-field">
+        <label for="'email" [ngStyle]="{ color: emailFocus ? 'blue' : '' }"
+          >E-mail Address*</label
+        >
+        <input
+          id="email"
+          type="email"
+          class="input-field"
+          formControlName="email"
+          placeholder="Email"
+          email="true"
+          (focus)="emailFocus = true"
+          (focusout)="emailFocus = false"
+          required
+        />
+      </div>
+      <li *ngIf="formControls.email.errors?.required && isSubmitted">
+        Required
+      </li>
+      <li *ngIf="formControls.email.errors?.email && isSubmitted">
+        Invalid email address
+      </li>
     </div>
-    <li
-      *ngIf="formControls.email.errors?.required && isSubmitted"
-      style="color: red; font-size: 12px"
-    >
-      Required
-    </li>
-    <div class="input-field">
-      <label for="password">Password*</label>
-      <input
-        id="password"
-        type="password"
-        class="input-field"
-        placeholder="Password"
-        formControlName="password"
-        required
-      />
+    <div class="input-container">
+      <div class="input-field">
+        <label for="password" [ngStyle]="{ color: passwordFocus ? 'blue' : '' }"
+          >Password*</label
+        >
+        <input
+          id="password"
+          type="password"
+          class="input-field"
+          formControlName="password"
+          placeholder="Password"
+          minlength="8"
+          (focus)="passwordFocus = true"
+          (focusout)="passwordFocus = false"
+          required
+        />
+      </div>
+      <li *ngIf="formControls.password.errors?.required && isSubmitted">
+        Required
+      </li>
+      <li *ngIf="formControls.password.errors?.minlength && isSubmitted">
+        Must be 8 characters or more
+      </li>
     </div>
-    <li
-      *ngIf="formControls.password.errors?.required && isSubmitted"
-      style="color: red; font-size: 12px"
-    >
-      Required
-    </li>
   </form>
-  <a href="#" style="margin-bottom: 20px; margin-top: 10px; font-size: 14px"
-    >Forgot password?</a
+  <span
+    style="
+      margin-bottom: 20px;
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: end;
+    "
   >
+    <a href="#" style="font-size: 14px">Forgot password?</a>
+  </span>
   <button form="login-form" type="submit" class="login-button">Sign in</button>
   <a href="#" style="margin-top: 30px; font-weight: 600"
     >Don't have an account? Sign Up!</a
