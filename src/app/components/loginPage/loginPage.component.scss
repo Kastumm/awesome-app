@@ -11,10 +11,18 @@
   .right-side {
     display: flex;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: center space-between;
     background-color: #ffffff;
     width: 43%;
 
+    span {
+      width: 100%;
+      height: 104px;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: flex-end;
+    }
     .login-box {
       width: 400px;
     }
