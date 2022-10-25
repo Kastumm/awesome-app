@@ -26,7 +26,7 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usersService.getAll().subscribe((response) => {
+    this.usersService.getNoResultsOfUsers(3).subscribe((response) => {
       this.users = response.results;
     });
 

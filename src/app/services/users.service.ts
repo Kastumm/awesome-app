@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { IUser } from '../models/IUser';
 
 @Injectable({
@@ -8,9 +9,9 @@ import { IUser } from '../models/IUser';
 })
 export class UsersService {
   constructor(private http: HttpClient) {}
-  getAll(): Observable<{ results: IUser[] }> {
+  getNoResultsOfUsers(noUsers: number): Observable<{ results: IUser[] }> {
     return this.http.get<{ results: IUser[] }>(
-      'https://randomuser.me/api/?results=3'
+      `${environment.randomUserApiUrl}?results=${noUsers}`
     );
   }
 }
