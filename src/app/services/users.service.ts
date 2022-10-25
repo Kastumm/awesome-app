@@ -9,9 +9,9 @@ import { IUser } from '../models/IUser';
 })
 export class UsersService {
   constructor(private http: HttpClient) {}
-  getNoResultsOfUsers(noUsers: number): Observable<{ results: IUser[] }> {
+  getByQuery(query: string): Observable<{ results: IUser[] }> {
     return this.http.get<{ results: IUser[] }>(
-      `${environment.randomUserApiUrl}?results=${noUsers}`
+      `${environment.randomUserApiUrl}${query}`
     );
   }
 }

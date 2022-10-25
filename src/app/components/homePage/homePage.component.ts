@@ -26,7 +26,7 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usersService.getNoResultsOfUsers(3).subscribe((response) => {
+    this.usersService.getByQuery('?results=3').subscribe((response) => {
       this.users = response.results;
     });
 
