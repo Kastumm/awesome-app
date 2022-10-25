@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Metrics } from 'src/app/models/metrics.model';
-import { UsersService } from '../../services/users.service';
-
 import { Store, select } from '@ngrx/store';
-import { LogoutAction } from 'src/app/user.actions';
 import { Router } from '@angular/router';
-import { selectUserEmail } from 'src/app/user.selectors';
-import { IAppState } from 'src/app/app.state';
+
+import { selectUserEmail } from 'src/app/redux/user.selectors';
+import { UsersService } from '../../services/users.service';
+import { LogoutAction } from 'src/app/redux/user.actions';
+import { Metrics } from 'src/app/models/metrics.model';
+import { IAppState } from 'src/app/redux/app.state';
 import { IUser } from 'src/app/models/IUser';
 
 @Component({
@@ -31,7 +31,7 @@ export class HomePageComponent implements OnInit {
     });
 
     this.store.pipe(select(selectUserEmail)).subscribe((value) => {
-      this.userEmail = value;
+      this.userEmail = value.split('@')[0];
     });
   }
 

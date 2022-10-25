@@ -15,7 +15,7 @@
           <div class="circle-background">
             <img src="assets/svg/user.svg" height="23px" />
           </div>
-          John Smith</a
+          {{ userEmail }}</a
         >
         <a>
           <div class="circle-background">
@@ -60,7 +60,7 @@
             [description]="'Likes'"
             [imageLink]="'assets/svg/like.svg'"
             [arrow]="'assets/svg/small-arrow-up.svg'"
-            [type]="'static'"
+            [type]="'metric'"
             [bgcolor]="'#2962ff;'"
           ></app-card>
           <app-card
@@ -68,7 +68,7 @@
             [description]="'Love'"
             [imageLink]="'assets/svg/heart.svg'"
             [arrow]="'assets/svg/small-arrow-right.svg'"
-            [type]="'static'"
+            [type]="'metric'"
             [bgcolor]="'#ff3d00;'"
           ></app-card>
           <app-card
@@ -76,7 +76,7 @@
             [description]="'Smiles'"
             [imageLink]="'assets/svg/smile.svg'"
             [arrow]="'assets/svg/small-arrow-down.svg'"
-            [type]="'static'"
+            [type]="'metric'"
             [bgcolor]="'#ffc400;'"
           ></app-card>
         </div>
@@ -86,12 +86,15 @@
           </li>
           <li style="font-size: 24px; font-weight: 800">6.967.431</li>
           <app-line-chart></app-line-chart>
-          <app-card
-            [info]="'Dashboard'"
-            [imageLink]="'assets/svg/dashboard2.svg'"
-            [arrow]="'assets/svg/forward-arrow.svg'"
-            [bgcolor]="'#fff'"
-          ></app-card>
+          <span style="margin-top: 35px">
+            <app-card
+              [info]="'Dashboard'"
+              [imageLink]="'assets/svg/dashboard2.svg'"
+              [arrow]="'assets/svg/forward-arrow.svg'"
+              [bgcolor]="'#fff'"
+              [type]="'static'"
+            ></app-card>
+          </span>
         </div>
       </div>
       <div class="right-column">
@@ -133,9 +136,10 @@
             [info]="user?.name?.first + ' ' + user?.name?.last"
             [description]="'12:30-13:40'"
             [arrow]="'assets/svg/forward-arrow.svg'"
+            [type]="'meeting'"
           ></app-card>
         </div>
-        <div class="plus-card">
+        <div class="plus-card" style="padding: 10px">
           <li style="font-weight: 500; font-size: 30px">+</li>
         </div>
       </div>
