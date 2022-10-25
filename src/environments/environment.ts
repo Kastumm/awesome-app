@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   randomUserApiUrl: 'https://randomuser.me/api/',
+  randomDataApiUrl: 'https://random-data-api.com/api/',
 };
 
 /*
