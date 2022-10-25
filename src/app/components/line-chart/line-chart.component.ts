@@ -4,7 +4,6 @@ import { Chart } from 'chart.js';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit {
   public chart?: Chart<'line', string[], string>;
@@ -27,14 +26,27 @@ export class LineChartComponent implements OnInit {
             borderWidth: 6,
             tension: 0.3,
             fill: true,
-            data: ['2.5', '1.4', '6', '4'],
+            data: ['2.5', '1.4', '6', '4', '7'],
           },
         ],
       },
       options: {
+        hover: {
+          intersect: false,
+        },
+        elements: {
+          point: {
+            hoverBackgroundColor: '#2962ff',
+            radius: 0,
+            hoverRadius: 8,
+            borderWidth: 4,
+          },
+        },
+        aspectRatio: 2,
+        responsive: true,
         scales: {
           x: {
-            display: false,
+            display: true,
           },
           y: {
             display: false,
