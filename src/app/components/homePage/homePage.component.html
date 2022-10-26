@@ -56,7 +56,7 @@
       <div class="middle-column">
         <div class="cards">
           <app-card
-            [info]="metrics.likes"
+            [info]="likes"
             [description]="'Likes'"
             [imageLink]="'assets/svg/like.svg'"
             [arrow]="'assets/svg/small-arrow-up.svg'"
@@ -64,7 +64,7 @@
             [bgcolor]="'#2962ff;'"
           ></app-card>
           <app-card
-            [info]="metrics.favorites"
+            [info]="favorites"
             [description]="'Love'"
             [imageLink]="'assets/svg/heart.svg'"
             [arrow]="'assets/svg/small-arrow-right.svg'"
@@ -72,7 +72,7 @@
             [bgcolor]="'#ff3d00;'"
           ></app-card>
           <app-card
-            [info]="metrics.smiles"
+            [info]="smiles"
             [description]="'Smiles'"
             [imageLink]="'assets/svg/smile.svg'"
             [arrow]="'assets/svg/small-arrow-down.svg'"
@@ -103,28 +103,28 @@
           <ul>
             <span>
               <label for="views">Views</label>
-              <li>{{ metrics.targetViews }}%</li>
+              <li>{{ targetViews }}%</li>
             </span>
-            <progress id="views" value="{{ metrics.targetViews }}" max="100">
-              {{ metrics.targetViews }}%
+            <progress id="views" value="{{ targetViews }}" max="100">
+              {{ targetViews }}%
             </progress>
             <span>
               <label for="followers">Followers</label>
-              <li>{{ metrics.targetFollowers }}%</li>
+              <li>{{ targetFollowers }}%</li>
             </span>
             <progress
               id="followers"
-              value="{{ metrics.targetFollowers }}"
+              value="{{ targetFollowers }}"
               max="100"
             >
-              {{ metrics.targetFollowers }}%
+              {{ targetFollowers }}%
             </progress>
             <span>
               <label for="income">Income</label>
-              <li>{{ metrics.targetIncome }}%</li>
+              <li>{{ targetIncome }}%</li>
             </span>
-            <progress id="income" value="{{ metrics.targetIncome }}" max="100">
-              {{ metrics.targetIncome }}%
+            <progress id="income" value="{{ targetIncome }}" max="100">
+              {{ targetIncome }}%
             </progress>
           </ul>
         </div>
