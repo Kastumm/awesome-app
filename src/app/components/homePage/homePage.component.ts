@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 
-import { RandomService } from 'src/app/services/random.service';
-import { selectUserEmail } from 'src/app/redux/user.selectors';
-import { IRandomNumbers } from 'src/app/models/IRandomNumber';
-import { UsersService } from '../../services/users.service';
-import { LogoutAction } from 'src/app/redux/user.actions';
+import { selectRandomNumbersData } from 'src/app/redux/randomnumbers/randomselectors';
+import { loadRandomNumbers } from 'src/app/redux/randomnumbers/randomnumber.actions';
+import { selectFakeUsersData } from 'src/app/redux/fakeusers/fakeusers.selectors';
+import { loadFakeUsers } from 'src/app/redux/fakeusers/fakeusers.actions';
+import { selectUserEmail } from 'src/app/redux/user/user.selectors';
+import { LogoutAction } from 'src/app/redux/user/user.actions';
+import { IRandomNumber } from 'src/app/models/IRandomNumber';
+import { IFakeUser } from 'src/app/models/IFakeUser';
 import { IAppState } from 'src/app/redux/app.state';
-import { IUser } from 'src/app/models/IUser';
 
 @Component({
   selector: 'app-homePage',
@@ -16,8 +18,8 @@ import { IUser } from 'src/app/models/IUser';
   styleUrls: ['./homePage.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  randomNumbers: IRandomNumbers[] = [];
-  users: IUser[] = [];
+  randomNumbers: IRandomNumber[] = [];
+  users: IFakeUser[] = [];
   userEmail: string = '';
 
   likes: string = '';
@@ -27,57 +29,50 @@ export class HomePageComponent implements OnInit {
   targetFollowers: string = '';
   targetIncome: string = '';
 
-  constructor(
-    private usersService: UsersService,
-    private randomService: RandomService,
-    private router: Router,
-    private store: Store<IAppState>
-  ) {}
+  constructor(private router: Router, private store: Store<IAppState>) {}
 
   ngOnInit(): void {
-    this.usersService.getByQuery('?results=3').subscribe((response) => {
-      this.users = response.results;
-    });
-
     this.store.pipe(select(selectUserEmail)).subscribe((value) => {
       this.userEmail = value.split('@')[0];
     });
 
-    this.randomService
-      .getByPath('number/random_number?size=50')
-      .subscribe((response) => {
-        const goodMetricsNumbers: number[] = [];
-        const goodTargetMetricsNumbers: number[] = [];
+    this.store.dispatch(loadFakeUsers());
+    this.store.pipe(select(selectFakeUsersData)).subscribe((value) => {
+      this.users = value.fakeUsers;
+    });
 
-        this.randomNumbers = response;
-        this.randomNumbers.forEach((element: IRandomNumbers) => {
-          if (element.number >= 3000000000 && element.number <= 5000000000) {
-            goodMetricsNumbers.push(element.number);
-          }
-          if (element.number >= 5000000001 && element.number <= 9500000000) {
-            goodTargetMetricsNumbers.push(element.number);
-          }
-        });
+    this.store.dispatch(loadRandomNumbers());
+    this.store.pipe(select(selectRandomNumbersData)).subscribe((value) => {
+      this.randomNumbers = value.randomNumbers;
+      const goodMetricsNumbers: number[] = [];
+      const goodTargetMetricsNumbers: number[] = [];
 
-        this.likes = goodMetricsNumbers[0]
-          .toString()
-          .slice(0, 5)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        this.favorites = goodMetricsNumbers[1]
-          .toString()
-          .slice(0, 5)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        this.smiles = goodMetricsNumbers[2]
-          .toString()
-          .slice(0, 5)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-        this.targetViews = goodTargetMetricsNumbers[0].toString().slice(0, 2);
-        this.targetFollowers = goodTargetMetricsNumbers[1]
-          .toString()
-          .slice(0, 2);
-        this.targetIncome = goodTargetMetricsNumbers[2].toString().slice(0, 2);
+      this.randomNumbers.forEach((element: IRandomNumber) => {
+        if (element.number >= 3000000000 && element.number <= 5000000000) {
+          goodMetricsNumbers.push(element.number);
+        }
+        if (element.number >= 5000000001 && element.number <= 9500000000) {
+          goodTargetMetricsNumbers.push(element.number);
+        }
       });
+
+      this.likes = goodMetricsNumbers[0]
+        .toString()
+        .slice(0, 5)
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      this.favorites = goodMetricsNumbers[1]
+        .toString()
+        .slice(0, 5)
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      this.smiles = goodMetricsNumbers[2]
+        .toString()
+        .slice(0, 5)
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+      this.targetViews = goodTargetMetricsNumbers[0].toString().slice(0, 2);
+      this.targetFollowers = goodTargetMetricsNumbers[1].toString().slice(0, 2);
+      this.targetIncome = goodTargetMetricsNumbers[2].toString().slice(0, 2);
+    });
   }
 
   logoutHandler(): void {

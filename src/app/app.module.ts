@@ -11,9 +11,14 @@ import { LoginComponent } from './components/login/login.component';
 import { CardComponent } from './components/card/card.component';
 import { LoginPageComponent } from './components/loginPage';
 import { HomePageComponent } from './components/homePage';
-import { userReducer } from './redux/user.reducer';
 import { AutoFocus } from './auto-focus.directive';
 import { AppComponent } from './app.component';
+import { randomNumbersReducer } from './redux/randomnumbers/randomnumber.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { RandomNumbersEffects } from './redux/randomnumbers/randomnumber.effect';
+import { FakeUsersEffects } from './redux/fakeusers/fakeusers.effects';
+import { fakeUsersReducer } from './redux/fakeusers/fakeusers.reducer';
+import { userReducer } from './redux/user/user.reducer';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,12 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot({
+      user: userReducer,
+      randomNumbers: randomNumbersReducer,
+      fakeUsers: fakeUsersReducer,
+    }),
+    EffectsModule.forRoot([RandomNumbersEffects, FakeUsersEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

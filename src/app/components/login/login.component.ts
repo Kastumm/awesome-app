@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { LoginAction } from 'src/app/redux/user.actions';
+import { LoginAction } from 'src/app/redux/user/user.actions';
 import { IUserState } from 'src/app/models/IUserState';
 
 @Component({

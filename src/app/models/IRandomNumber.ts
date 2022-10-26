@@ -1,3 +1,3 @@
-export interface IRandomNumbers {
+export interface IRandomNumber {
   number: number;
 }

@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { IUserState } from '../models/IUserState';
+import { IUserState } from 'src/app/models/IUserState';
 import { LoginAction, LogoutAction } from './user.actions';
 
 export const initialState: IUserState = { email: '', password: '' };
